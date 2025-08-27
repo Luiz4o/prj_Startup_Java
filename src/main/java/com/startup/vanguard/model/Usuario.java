@@ -17,4 +17,6 @@ public class Usuario {
     private String password;
     @Column(nullable = false)
     private OffsetDateTime data_criacao;
+    @Column(nullable = false)
+    private String telefone;
 }
