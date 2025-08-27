@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class Pedido {
     @JoinColumn(name = "id_carrinho", nullable = false)
     private Carrinho carrinho;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_comprador", nullable = false)
     private Comprador comprador;
 
