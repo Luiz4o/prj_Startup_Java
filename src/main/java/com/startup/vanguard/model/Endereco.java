@@ -2,10 +2,12 @@ package com.startup.vanguard.model;
 
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Embeddable
+@Table(name = "enderecos")
 public class Endereco {
 
     @NotBlank(message = "A rua é obrigatória")
