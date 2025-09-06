@@ -2,11 +2,14 @@ package com.startup.vanguard.service;
 
 import com.startup.vanguard.DTO.ProdutoCreateDTO;
 import com.startup.vanguard.DTO.ProdutoResponseDTO;
+import com.startup.vanguard.DTO.ProdutoUpdateDTO;
 import com.startup.vanguard.exception.ResourceNotFoundException;
+import com.startup.vanguard.model.Categoria;
 import com.startup.vanguard.model.Produto;
 import com.startup.vanguard.repository.CategoriaRepository;
 import com.startup.vanguard.repository.LojistaRepository;
 import com.startup.vanguard.repository.ProdutoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +33,7 @@ public class ProdutoService {
                 .toList();
     }
 
+    @Transactional
     public ProdutoResponseDTO insertProduto(ProdutoCreateDTO produtoCreateDTO) {
         var lojista = lojistaRepository.findById(produtoCreateDTO.id_lojista())
                 .orElseThrow(() -> new ResourceNotFoundException("Lojista", produtoCreateDTO.id_lojista()));
@@ -40,5 +44,42 @@ public class ProdutoService {
         var produtoCreated =produtoRepository.save(new Produto(lojista,categoria,produtoCreateDTO));
 
         return new ProdutoResponseDTO(produtoCreated);
+    }
+
+    @Transactional
+    public ProdutoResponseDTO updateProduto(ProdutoUpdateDTO produtoUpdateDTO){
+        var produto = produtoRepository.findById(produtoUpdateDTO.id())
+                .orElseThrow(() -> new ResourceNotFoundException("Produto",produtoUpdateDTO.id()));
+
+        if (produtoUpdateDTO.id_categoria() != null) {
+            var categoria = categoriaRepository.findById(produtoUpdateDTO.id_categoria())
+                    .orElseThrow(() -> new ResourceNotFoundException("Categoria",produtoUpdateDTO.id_categoria()));
+            produto.setCategoria(categoria);
+        }
+
+        if (produtoUpdateDTO.nome() != null && !produtoUpdateDTO.nome().isBlank()) {
+            produto.setNome(produtoUpdateDTO.nome());
+        }
+
+        if (produtoUpdateDTO.descricao() != null && !produtoUpdateDTO.descricao().isBlank()) {
+            produto.setDescricao(produtoUpdateDTO.descricao());
+        }
+
+        if (produtoUpdateDTO.price() != null) {
+            produto.setPrice(produtoUpdateDTO.price());
+        }
+
+        if (produtoUpdateDTO.quantidadeEstoque() != null) {
+            produto.setQuantidadeEstoque(produtoUpdateDTO.quantidadeEstoque());
+        }
+
+        return new ProdutoResponseDTO(produtoRepository.save(produto));
+    }
+
+    public ProdutoResponseDTO getById(Long id) {
+        var produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto",id));
+
+        return new ProdutoResponseDTO(produto);
     }
 }
