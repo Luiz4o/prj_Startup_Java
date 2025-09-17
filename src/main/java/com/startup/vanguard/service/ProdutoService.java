@@ -1,10 +1,9 @@
 package com.startup.vanguard.service;
 
-import com.startup.vanguard.DTO.ProdutoCreateDTO;
-import com.startup.vanguard.DTO.ProdutoResponseDTO;
-import com.startup.vanguard.DTO.ProdutoUpdateDTO;
+import com.startup.vanguard.DTO.produto.ProdutoCreateDTO;
+import com.startup.vanguard.DTO.produto.ProdutoResponseDTO;
+import com.startup.vanguard.DTO.produto.ProdutoUpdateDTO;
 import com.startup.vanguard.exception.ResourceNotFoundException;
-import com.startup.vanguard.model.Categoria;
 import com.startup.vanguard.model.Produto;
 import com.startup.vanguard.repository.CategoriaRepository;
 import com.startup.vanguard.repository.LojistaRepository;

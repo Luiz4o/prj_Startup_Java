@@ -1,11 +1,6 @@
-package com.startup.vanguard.DTO;
+package com.startup.vanguard.DTO.produto;
 
-import com.startup.vanguard.model.Categoria;
-import com.startup.vanguard.model.Lojista;
 import com.startup.vanguard.model.Produto;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 import java.math.BigDecimal;
 

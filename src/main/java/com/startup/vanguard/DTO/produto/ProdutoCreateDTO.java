@@ -1,4 +1,4 @@
-package com.startup.vanguard.DTO;
+package com.startup.vanguard.DTO.produto;
 
 import java.math.BigDecimal;
 
