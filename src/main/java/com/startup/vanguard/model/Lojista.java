@@ -1,6 +1,6 @@
 package com.startup.vanguard.model;
 
-import com.startup.vanguard.DTO.lojista.LojistaCreateDTO;
+import com.startup.vanguard.dto.lojista.LojistaCreateDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

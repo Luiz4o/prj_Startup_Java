@@ -1,4 +1,4 @@
-package com.startup.vanguard.DTO.lojista;
+package com.startup.vanguard.dto.lojista;
 
 import com.startup.vanguard.model.Lojista;
 

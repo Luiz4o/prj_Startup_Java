@@ -1,12 +1,10 @@
 package com.startup.vanguard.controller;
 
-import com.startup.vanguard.DTO.lojista.LojistaCreateDTO;
-import com.startup.vanguard.DTO.lojista.LojistaResponseDTO;
-import com.startup.vanguard.repository.LojistaRepository;
+import com.startup.vanguard.dto.lojista.LojistaCreateDTO;
+import com.startup.vanguard.dto.lojista.LojistaResponseDTO;
 import com.startup.vanguard.service.LojistaService;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

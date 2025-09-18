@@ -1,8 +1,8 @@
 package com.startup.vanguard.service;
 
-import com.startup.vanguard.DTO.produto.ProdutoCreateDTO;
-import com.startup.vanguard.DTO.produto.ProdutoResponseDTO;
-import com.startup.vanguard.DTO.produto.ProdutoUpdateDTO;
+import com.startup.vanguard.dto.produto.ProdutoCreateDTO;
+import com.startup.vanguard.dto.produto.ProdutoResponseDTO;
+import com.startup.vanguard.dto.produto.ProdutoUpdateDTO;
 import com.startup.vanguard.exception.ResourceNotFoundException;
 import com.startup.vanguard.model.Produto;
 import com.startup.vanguard.repository.CategoriaRepository;
@@ -28,7 +28,7 @@ public class ProdutoService {
 
     public List<ProdutoResponseDTO> getAll(){
         return produtoRepository.findAll().stream()
-                .map(p -> new ProdutoResponseDTO(p))
+                .map(ProdutoResponseDTO::new)
                 .toList();
     }
 

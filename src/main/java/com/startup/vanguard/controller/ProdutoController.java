@@ -1,7 +1,7 @@
 package com.startup.vanguard.controller;
 
-import com.startup.vanguard.DTO.produto.ProdutoCreateDTO;
-import com.startup.vanguard.DTO.produto.ProdutoResponseDTO;
+import com.startup.vanguard.dto.produto.ProdutoCreateDTO;
+import com.startup.vanguard.dto.produto.ProdutoResponseDTO;
 import com.startup.vanguard.service.ProdutoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

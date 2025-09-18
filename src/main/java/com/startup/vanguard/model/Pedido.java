@@ -1,6 +1,6 @@
 package com.startup.vanguard.model;
 
-import com.startup.vanguard.DTO.EnumStatus;
+import com.startup.vanguard.dto.EnumStatus;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

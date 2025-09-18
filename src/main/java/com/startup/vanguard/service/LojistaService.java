@@ -1,7 +1,7 @@
 package com.startup.vanguard.service;
 
-import com.startup.vanguard.DTO.lojista.LojistaCreateDTO;
-import com.startup.vanguard.DTO.lojista.LojistaResponseDTO;
+import com.startup.vanguard.dto.lojista.LojistaCreateDTO;
+import com.startup.vanguard.dto.lojista.LojistaResponseDTO;
 import com.startup.vanguard.model.Lojista;
 import com.startup.vanguard.repository.LojistaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

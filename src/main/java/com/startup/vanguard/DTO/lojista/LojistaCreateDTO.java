@@ -1,4 +1,4 @@
-package com.startup.vanguard.DTO.lojista;
+package com.startup.vanguard.dto.lojista;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +14,7 @@ public record LojistaCreateDTO(
         String password,
 
         @NotBlank(message = "Telefone é obrigatório")
+        @Size(min = 11, message = "O número de telefone deve ter 11 caracteres (XX) XXXXX-XXXX")
         String telefone,
 
         @NotBlank(message = "Razão Social é obrigatória")
