@@ -3,8 +3,7 @@ package com.startup.vanguard.controller;
 import com.startup.vanguard.dto.AuthenticationRequest;
 import com.startup.vanguard.dto.AuthenticationResponse;
 import com.startup.vanguard.security.JwtUtil;
-import com.startup.vanguard.service.UserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.startup.vanguard.service.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,9 +22,9 @@ public class AuthController {
 
     private final JwtUtil jwtUtil;
 
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;

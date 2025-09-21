@@ -1,5 +1,6 @@
 package com.startup.vanguard.model;
 
+import com.startup.vanguard.dto.EnumStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

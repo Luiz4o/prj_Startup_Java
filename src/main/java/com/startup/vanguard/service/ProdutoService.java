@@ -47,6 +47,7 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponseDTO updateProduto(ProdutoUpdateDTO produtoUpdateDTO){
+        System.out.println(produtoUpdateDTO);
         var produto = produtoRepository.findById(produtoUpdateDTO.id())
                 .orElseThrow(() -> new ResourceNotFoundException("Produto",produtoUpdateDTO.id()));
 
@@ -80,5 +81,12 @@ public class ProdutoService {
                 .orElseThrow(() -> new ResourceNotFoundException("Produto",id));
 
         return new ProdutoResponseDTO(produto);
+    }
+
+    @Transactional
+    public void deleteById(Long id){
+        var produto = this.getById(id);
+
+        produtoRepository.deleteById(id);
     }
 }
