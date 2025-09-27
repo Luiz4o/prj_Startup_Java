@@ -1,7 +1,7 @@
 package com.startup.vanguard.controller;
 
-import com.startup.vanguard.dto.AuthenticationRequest;
-import com.startup.vanguard.dto.AuthenticationResponse;
+import com.startup.vanguard.dto.auth.AuthenticationRequest;
+import com.startup.vanguard.dto.auth.AuthenticationResponse;
 import com.startup.vanguard.security.JwtUtil;
 import com.startup.vanguard.service.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;

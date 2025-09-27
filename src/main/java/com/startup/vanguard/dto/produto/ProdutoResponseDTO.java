@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 
 public record ProdutoResponseDTO (
         long id,
-//        Lojista lojista,
-//        Categoria categoria,
         String nome,
         String descricao,
         BigDecimal price,

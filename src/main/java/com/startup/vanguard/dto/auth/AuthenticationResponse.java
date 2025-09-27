@@ -1,4 +1,4 @@
-package com.startup.vanguard.dto;
+package com.startup.vanguard.dto.auth;
 
 public class AuthenticationResponse {
 
