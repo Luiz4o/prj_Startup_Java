@@ -1,5 +1,6 @@
 package com.startup.vanguard.model;
 
+import com.startup.vanguard.dto.comprador.CompradorCreateDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,6 +42,17 @@ public class Comprador implements UserDetails {
 
     @Column(nullable = false)
     private String tipoPessoa;
+
+    public Comprador(CompradorCreateDTO compradorCreateDTO, String password) {
+        this.email = compradorCreateDTO.email();
+        this.password = password;
+        this.data_criacao = OffsetDateTime.now();
+        this.telefone = compradorCreateDTO.telefone();
+        this.isAtivo = true;
+        this.nomeCompleto = compradorCreateDTO.nomeCompleto();
+        this.documento = compradorCreateDTO.documento();
+        this.tipoPessoa = compradorCreateDTO.tipoPessoa();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
