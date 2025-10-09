@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "carrinhos")
+@Data
 public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
