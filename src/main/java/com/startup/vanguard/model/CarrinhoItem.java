@@ -28,4 +28,10 @@ public class CarrinhoItem {
     private Produto produto;
 
     private int quantidade;
+
+    public CarrinhoItem(Carrinho carrinho, Produto produto, int quantidade) {
+        this.carrinho = carrinho;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
 }

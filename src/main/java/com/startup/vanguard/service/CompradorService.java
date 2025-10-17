@@ -5,6 +5,7 @@ import com.startup.vanguard.dto.comprador.CompradorResponseDTO;
 import com.startup.vanguard.dto.comprador.CompradorUpdateDTO;
 import com.startup.vanguard.exception.ResourceNotFoundException;
 import com.startup.vanguard.model.Comprador;
+import com.startup.vanguard.model.Endereco;
 import com.startup.vanguard.repository.CompradorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -67,5 +68,22 @@ public class CompradorService {
 
         comprador.setAtivo(false);
         compradorRepository.save(comprador);
+    }
+
+    @Transactional
+    public Endereco findEnderecoById(Long compradorId) {
+        var comprador = compradorRepository.findById(compradorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Comprador", compradorId));
+        return comprador.getEndereco();
+    }
+
+    @Transactional
+    public Endereco updateEndereco(Long compradorId, Endereco novoEndereco) {
+        var comprador = compradorRepository.findById(compradorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Comprador", compradorId));
+
+        comprador.setEndereco(novoEndereco);
+        var compradorAtualizado = compradorRepository.save(comprador);
+        return compradorAtualizado.getEndereco();
     }
 }

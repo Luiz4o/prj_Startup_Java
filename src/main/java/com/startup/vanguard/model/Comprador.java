@@ -43,6 +43,9 @@ public class Comprador implements UserDetails {
     @Column(nullable = false)
     private String tipoPessoa;
 
+    @Embedded
+    private Endereco endereco;
+
     public Comprador(CompradorCreateDTO compradorCreateDTO, String password) {
         this.email = compradorCreateDTO.email();
         this.password = password;
@@ -52,6 +55,7 @@ public class Comprador implements UserDetails {
         this.nomeCompleto = compradorCreateDTO.nomeCompleto();
         this.documento = compradorCreateDTO.documento();
         this.tipoPessoa = compradorCreateDTO.tipoPessoa();
+        this.endereco = compradorCreateDTO.endereco();
     }
 
     @Override

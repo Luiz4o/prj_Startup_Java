@@ -1,4 +1,6 @@
 package com.startup.vanguard.dto.carrinho;
 
-public record CarrinhoUpdateDTO(String status) {
+import com.startup.vanguard.dto.EnumStatus;
+
+public record CarrinhoUpdateDTO(EnumStatus status) {
 }

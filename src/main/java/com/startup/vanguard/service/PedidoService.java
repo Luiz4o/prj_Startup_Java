@@ -76,11 +76,10 @@ public class PedidoService {
                 .comprador(compradorPedido)
                 .build());
 
-        // ADICIONAR OS ITENS DO PEDIDO APOS CRIAR O PEDIDO VOU EPGAR A LISTA DE ITENS CARRINHO PARA CRIAR O PEDIDO ITENS E INSERIR NO PEDIDO(UPDATE?)
-        pedidoItemService.createPedidoItemByCarrinhoItem(carrinhoPedido.getItens(),pedido);
+        var pedidosItem = pedidoItemService.createPedidoItemByCarrinhoItem(carrinhoPedido.getItens(),pedido);
 
-        // ATUALIZAR O ITEM PARA ADICIONAR OS ITENS CRIADO A PARTIR DO CARRINHO ITEM
-        pedido = pedidoRepository.save();
+        pedido.setPedidoItems(pedidosItem);
+        pedido = pedidoRepository.save(pedido);
 
         return PedidoResponseDTO.builder()
                 .id(pedido.getId())
@@ -91,6 +90,7 @@ public class PedidoService {
                 .ultimaAtualizacao(pedido.getUltimaAtualizacao())
                 .valor_total(pedido.getValor_total())
                 .comprador(pedido.getComprador())
+                .itens(pedido.getPedidoItems())
                 .build();
     }
 

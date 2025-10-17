@@ -3,7 +3,9 @@ package com.startup.vanguard.controller;
 import com.startup.vanguard.dto.comprador.CompradorCreateDTO;
 import com.startup.vanguard.dto.comprador.CompradorResponseDTO;
 import com.startup.vanguard.dto.comprador.CompradorUpdateDTO;
+import com.startup.vanguard.model.Endereco;
 import com.startup.vanguard.service.CompradorService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +64,19 @@ public class CompradorController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         compradorService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{compradorId}/endereco")
+    public ResponseEntity<Endereco> findEnderecoById(@PathVariable Long compradorId) {
+        var endereco = compradorService.findEnderecoById(compradorId);
+        return ResponseEntity.ok(endereco);
+    }
+
+    @PutMapping("/{compradorId}/endereco")
+    public ResponseEntity<Endereco> updateEndereco(@PathVariable Long compradorId,
+                                                   @RequestBody Endereco novoEndereco) {
+        var enderecoAtualizado = compradorService.updateEndereco(compradorId, novoEndereco);
+        return ResponseEntity.ok(enderecoAtualizado);
     }
 }
 

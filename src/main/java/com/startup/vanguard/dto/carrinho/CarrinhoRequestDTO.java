@@ -1,4 +1,9 @@
 package com.startup.vanguard.dto.carrinho;
 
-public record CarrinhoRequestDTO(Long idComprador) {
+import com.startup.vanguard.model.CarrinhoItem;
+
+import java.util.List;
+
+public record CarrinhoRequestDTO(
+        Long idComprador) {
 }

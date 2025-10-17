@@ -30,8 +30,12 @@ public class Carrinho {
 
     private OffsetDateTime dataCriacao;
 
-    private String status;
+    private EnumStatus status;
 
     @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
     private List<CarrinhoItem> itens = new ArrayList<>();
+
+    public void addItem(CarrinhoItem carrinhoItem){
+        itens.add(carrinhoItem);
+    }
 }
