@@ -67,11 +67,10 @@ public class CarrinhoService {
 
         var carrinhoItem = new CarrinhoItem(carrinho,produto, dto.quantidade());
 
-        carrinhoItem = carrinhoItemRepository.save(carrinhoItem);
+        carrinho.addItem(carrinhoItem);
+        carrinhoRepository.save(carrinho);
 
-        carrinhoItem.
-
-        return new CarrinhoResponseDTO()
+        return new CarrinhoResponseDTO(carrinho);
     }
 
     public CarrinhoResponseDTO update(long id, CarrinhoUpdateDTO dto) {
