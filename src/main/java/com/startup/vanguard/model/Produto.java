@@ -10,16 +10,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "produtos")
+@Builder
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,30 +44,40 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private BigDecimal preco;
 
     @Column(nullable = false)
     private int quantidadeEstoque;
+
+    private String nomeFoto;
+
+    private String referenciaFoto;
+
+    private String nomeDocumento;
+
+    private String referenciaDoc;
 
 //    Adicionar um codigo unico como se fosse um codigo de barras caso a loja ja implemente um sistema de verificação de item
 //    private String codigoUnico
 
 
-    public Produto(Lojista lojista, Categoria categoria, ProdutoCreateDTO produtoCreateDTO) {
+    public Produto(Lojista lojista, Categoria categoria, ProdutoCreateDTO produtoCreateDTO, MultipartFile foto, MultipartFile doc) {
         this.lojista = lojista;
         this.categoria = categoria;
         this.nome = produtoCreateDTO.nome();
         this.descricao = produtoCreateDTO.descricao();
-        this.price = produtoCreateDTO.price();
+        this.preco = produtoCreateDTO.preco();
         this.quantidadeEstoque = produtoCreateDTO.quantidadeEstoque();
+        this.nomeFoto = foto.getOriginalFilename();
+        this.nomeDocumento = doc.getOriginalFilename();
     }
 
-    public Produto(Lojista lojista, Categoria categoria, String nome, String descricao, BigDecimal price, int quantidadeEstoque) {
+    public Produto(Lojista lojista, Categoria categoria, String nome, String descricao, BigDecimal preco, int quantidadeEstoque) {
         this.lojista = lojista;
         this.categoria = categoria;
         this.nome = nome;
         this.descricao = descricao;
-        this.price = price;
+        this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
     }
 

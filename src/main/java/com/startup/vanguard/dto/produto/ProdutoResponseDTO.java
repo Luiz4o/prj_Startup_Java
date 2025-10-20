@@ -8,10 +8,14 @@ public record ProdutoResponseDTO (
         long id,
         String nome,
         String descricao,
-        BigDecimal price,
-        int quantidadeEstoque
+        BigDecimal preco,
+        int quantidadeEstoque,
+        String nomeFoto,
+        String nomeDocumento,
+        String urlFoto,
+        String urlDocumento
 ){
-    public ProdutoResponseDTO (Produto p){
-        this(p.getId(),p.getNome(),p.getDescricao(),p.getPrice(),p.getQuantidadeEstoque());
+    public ProdutoResponseDTO (Produto p, String urlFoto, String urlDocumento){
+        this(p.getId(),p.getNome(),p.getDescricao(),p.getPreco(),p.getQuantidadeEstoque(),p.getNomeFoto(),p.getNomeDocumento(), urlFoto, urlDocumento);
     }
 }

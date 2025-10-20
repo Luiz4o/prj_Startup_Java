@@ -44,7 +44,7 @@ public class CarrinhoService {
         return new CarrinhoResponseDTO(carrinho);
     }
 
-    public CarrinhoResponseDTO insert(CarrinhoRequestDTO dto) {
+    public CarrinhoResponseDTO create(CarrinhoRequestDTO dto) {
         var comprador = compradorRepository.findById(dto.idComprador())
                 .orElseThrow(() -> new ResourceNotFoundException("Comprador", dto.idComprador()));
 

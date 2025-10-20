@@ -1,5 +1,6 @@
 package com.startup.vanguard.controller;
 
+import com.startup.vanguard.dto.carrinho.CarrinhoItemResquestDTO;
 import com.startup.vanguard.dto.carrinho.CarrinhoRequestDTO;
 import com.startup.vanguard.dto.carrinho.CarrinhoResponseDTO;
 import com.startup.vanguard.dto.carrinho.CarrinhoUpdateDTO;
@@ -40,7 +41,7 @@ public class CarrinhoController {
 
     @PostMapping
     public ResponseEntity<CarrinhoResponseDTO> insertCarrinho(@RequestBody CarrinhoRequestDTO carrinhoRequestDTO) {
-        var carrinho = carrinhoService.insert(carrinhoRequestDTO);
+        var carrinho = carrinhoService.create(carrinhoRequestDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -60,5 +61,11 @@ public class CarrinhoController {
     public ResponseEntity<Void> deleteCarrinho(@PathVariable long id) {
         carrinhoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<CarrinhoResponseDTO> insertItemCarrinho(@RequestBody CarrinhoItemResquestDTO dto){
+        var carrinhoAtualizado = carrinhoService.InsertItem(dto);
+        return  ResponseEntity.ok().body(carrinhoAtualizado);
     }
 }

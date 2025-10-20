@@ -31,7 +31,6 @@ public class LojistaService {
         var lojistaSaved =lojistaRepository.save(lojista);
 
         return new LojistaResponseDTO(lojistaSaved);
-
     }
 
     @Transactional

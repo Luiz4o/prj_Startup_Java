@@ -32,7 +32,7 @@ public class PedidoItemService {
 
                     return pedidoItemRepository.save(PedidoItem.builder()
                                     .pedido(pedido)
-                                    .precoUnitario(produto.getPrice())
+                                    .precoUnitario(produto.getPreco())
                                     .quantidade(cItem.getQuantidade())
                                     .produto(produto)
                             .build());
