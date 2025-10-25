@@ -1,0 +1,5 @@
+CREATE TABLE categorias (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao VARCHAR(500) NOT NULL
+);

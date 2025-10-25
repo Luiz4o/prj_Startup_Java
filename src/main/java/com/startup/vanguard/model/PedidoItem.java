@@ -1,5 +1,8 @@
 package com.startup.vanguard.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,8 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -16,6 +21,8 @@ import java.math.BigDecimal;
 @Table(name = "pedido_itens")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PedidoItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +30,14 @@ public class PedidoItem {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
+    @JsonIgnore
     private Pedido pedido;
 
-    // TROCAR ESTE CARA INVES DE ASSOCIAR UM PRODUTO FAZER A CRIAÇÃO DE UM NOVO PRODUTO? OU TALVEZ COMO AQUI JA SERIA UM ITEM DO PEDIDO TER AS INFORMAÇÔES COMPLETAS INVES DE RELACIONAR
-    @ManyToOne
-    @JoinColumn(name = "id_produto", nullable = false)
-    private Produto produto;
+    @Embedded
+    private DadosProdutoPedido dadosProduto;
 
     private int quantidade;
 
+    @Column(name = "preco_unitario")
     private BigDecimal precoUnitario;
 }

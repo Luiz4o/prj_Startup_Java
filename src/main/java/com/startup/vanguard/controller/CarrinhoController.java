@@ -51,21 +51,21 @@ public class CarrinhoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CarrinhoResponseDTO> updateCarrinho(@PathVariable long id,
+    public ResponseEntity<CarrinhoResponseDTO> updateCarrinho(@PathVariable Long id,
                                                               @RequestBody CarrinhoUpdateDTO carrinhoUpdateDTO) {
         var carrinhoAtualizado = carrinhoService.update(id, carrinhoUpdateDTO);
         return ResponseEntity.ok(carrinhoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCarrinho(@PathVariable long id) {
+    public ResponseEntity<Void> deleteCarrinho(@PathVariable Long id) {
         carrinhoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<CarrinhoResponseDTO> insertItemCarrinho(@RequestBody CarrinhoItemResquestDTO dto){
-        var carrinhoAtualizado = carrinhoService.InsertItem(dto);
+    public ResponseEntity<CarrinhoResponseDTO> insertItemCarrinho(@PathVariable("id") Long id, @RequestBody CarrinhoItemResquestDTO dto){
+        var carrinhoAtualizado = carrinhoService.InsertItem(dto,id);
         return  ResponseEntity.ok().body(carrinhoAtualizado);
     }
 }

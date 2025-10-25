@@ -27,11 +27,11 @@ import java.util.UUID;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "id_lojista", nullable = false)
-    private Lojista lojista;
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario lojista;
 
     @OneToOne
     @JoinColumn(name = "id_categoria", nullable = false)
@@ -57,11 +57,8 @@ public class Produto {
 
     private String referenciaDoc;
 
-//    Adicionar um codigo unico como se fosse um codigo de barras caso a loja ja implemente um sistema de verificação de item
-//    private String codigoUnico
 
-
-    public Produto(Lojista lojista, Categoria categoria, ProdutoCreateDTO produtoCreateDTO, MultipartFile foto, MultipartFile doc) {
+    public Produto(Usuario lojista, Categoria categoria, ProdutoCreateDTO produtoCreateDTO, MultipartFile foto, MultipartFile doc) {
         this.lojista = lojista;
         this.categoria = categoria;
         this.nome = produtoCreateDTO.nome();
@@ -72,7 +69,7 @@ public class Produto {
         this.nomeDocumento = doc.getOriginalFilename();
     }
 
-    public Produto(Lojista lojista, Categoria categoria, String nome, String descricao, BigDecimal preco, int quantidadeEstoque) {
+    public Produto(Usuario lojista, Categoria categoria, String nome, String descricao, BigDecimal preco, int quantidadeEstoque) {
         this.lojista = lojista;
         this.categoria = categoria;
         this.nome = nome;

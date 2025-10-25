@@ -5,9 +5,10 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Embeddable
-@Table(name = "enderecos")
+@Data
 public class Endereco {
 
     @NotBlank(message = "A rua é obrigatória")

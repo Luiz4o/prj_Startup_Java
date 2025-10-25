@@ -9,10 +9,9 @@ import com.startup.vanguard.exception.ResourceNotFoundException;
 import com.startup.vanguard.exception.S3Exception;
 import com.startup.vanguard.model.Produto;
 import com.startup.vanguard.repository.CategoriaRepository;
-import com.startup.vanguard.repository.LojistaRepository;
 import com.startup.vanguard.repository.ProdutoRepository;
+import com.startup.vanguard.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,13 +23,13 @@ import java.util.List;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
-    private final LojistaRepository lojistaRepository;
+    private final UsuarioRepository usuarioRepository;
     private final CategoriaRepository categoriaRepository;
     private final S3Service s3Service;
 
-    public ProdutoService(ProdutoRepository produtoRepository, LojistaRepository lojistaRepository, CategoriaRepository categoriaRepository, S3Service s3Service) {
+    public ProdutoService(ProdutoRepository produtoRepository, UsuarioRepository usuarioRepository, CategoriaRepository categoriaRepository, S3Service s3Service) {
         this.produtoRepository = produtoRepository;
-        this.lojistaRepository = lojistaRepository;
+        this.usuarioRepository = usuarioRepository;
         this.categoriaRepository = categoriaRepository;
         this.s3Service = s3Service;
     }
@@ -53,8 +52,8 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoCreatedDTO insertProduto(ProdutoCreateDTO produtoCreateDTO, MultipartFile foto, MultipartFile documento){
-        var lojista = lojistaRepository.findById(produtoCreateDTO.idLojista())
-                .orElseThrow(() -> new ResourceNotFoundException("Lojista", produtoCreateDTO.idLojista()));
+        var usuario = usuarioRepository.findById(produtoCreateDTO.idLojista())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", produtoCreateDTO.idLojista()));
 
         var categoria = categoriaRepository.findById(produtoCreateDTO.idCategoria())
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria", produtoCreateDTO.idCategoria()));
@@ -79,7 +78,7 @@ public class ProdutoService {
                         .referenciaDoc(referenciaDoc)
                         .nomeDocumento(documento.getOriginalFilename())
                         .categoria(categoria)
-                        .lojista(lojista)
+                        .lojista(usuario)
                         .descricao(produtoCreateDTO.descricao())
                         .nome(produtoCreateDTO.nome())
                         .quantidadeEstoque(produtoCreateDTO.quantidadeEstoque())

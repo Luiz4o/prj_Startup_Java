@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CategoriaService {
@@ -44,10 +45,12 @@ public class CategoriaService {
         var categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria", id));
 
-        // Atualiza os campos
-        categoria.setNome(dto.nome());
-        categoria.setDescricao(dto.descricao());
-
+        if(!Objects.isNull(dto.nome())) {
+            categoria.setNome(dto.nome());
+        }
+        if(!Objects.isNull(dto.descricao())){
+            categoria.setDescricao(dto.descricao());
+        }
         categoriaRepository.save(categoria);
         return new CategoriaReponseDTO(categoria);
     }

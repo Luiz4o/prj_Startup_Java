@@ -1,9 +1,0 @@
-CREATE TABLE lojistas (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    razao_social VARCHAR(255) NOT NULL UNIQUE,
-    cnpj VARCHAR(50) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    data_criacao DATETIME NOT NULL,
-    telefone VARCHAR(50) NOT NULL
-);

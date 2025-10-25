@@ -5,7 +5,7 @@ import com.startup.vanguard.model.Produto;
 import java.math.BigDecimal;
 
 public record ProdutoResponseDTO (
-        long id,
+        Long id,
         String nome,
         String descricao,
         BigDecimal preco,

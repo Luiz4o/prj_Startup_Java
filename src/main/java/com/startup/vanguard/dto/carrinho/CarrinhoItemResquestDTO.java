@@ -6,7 +6,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 public record CarrinhoItemResquestDTO(
-        Long idCarrinho,
         Long idProduto,
         int quantidade
 ) {

@@ -8,8 +8,11 @@ import com.startup.vanguard.repository.PedidoItemRepository;
 import com.startup.vanguard.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import com.startup.vanguard.model.DadosProdutoPedido;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoItemService {
@@ -23,22 +26,34 @@ public class PedidoItemService {
         this.produtoRepository = produtoRepository;
     }
 
-    @Transactional
-    public List<PedidoItem> createPedidoItemByCarrinhoItem(List<CarrinhoItem> carrinhoItemList, Pedido pedido){
+   @Transactional
+    public List<PedidoItem> createPedidoItemByCarrinhoItem(List<CarrinhoItem> carrinhoItemList, Pedido pedido) {
         return carrinhoItemList.stream()
                 .map(cItem -> {
                     var produto = produtoRepository.findById(cItem.getProduto().getId())
-                                    .orElseThrow(() -> new ResourceNotFoundException("Produto", cItem.getProduto().getId()));
+                            .orElseThrow(() -> new ResourceNotFoundException("Produto", cItem.getProduto().getId()));
+
+                    var dadosProduto = DadosProdutoPedido.builder()
+                            .idProdutoOriginal(produto.getId())
+                            .nome(produto.getNome())
+                            .nomeCategoria(produto.getCategoria().getNome())
+                            .nomeDocumento(produto.getNomeDocumento())
+                            .referenciaDoc(produto.getReferenciaDoc())
+                            .referenciaFoto(produto.getReferenciaFoto())
+                            .nomeLojista(produto.getLojista().getNomeCompleto())
+                            .precoNaCompra(produto.getPreco())
+                            .descricao(produto.getDescricao())
+                            .nomeFoto(produto.getNomeFoto())
+                            .build();
 
                     return pedidoItemRepository.save(PedidoItem.builder()
-                                    .pedido(pedido)
-                                    .precoUnitario(produto.getPreco())
-                                    .quantidade(cItem.getQuantidade())
-                                    .produto(produto)
+                            .pedido(pedido)
+                            .dadosProduto(dadosProduto)
+                            .quantidade(cItem.getQuantidade())
+                            .precoUnitario(produto.getPreco())
                             .build());
-
                 })
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
 

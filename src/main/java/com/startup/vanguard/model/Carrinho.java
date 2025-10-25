@@ -1,6 +1,6 @@
 package com.startup.vanguard.model;
 
-import com.startup.vanguard.dto.EnumStatus;
+import com.startup.vanguard.dto.carrinho.EnumStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +25,12 @@ public class Carrinho {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_comprador", nullable = false)
-    private Comprador comprador;
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     private OffsetDateTime dataCriacao;
 
-    private EnumStatus status;
+    private String status;
 
     @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
     private List<CarrinhoItem> itens = new ArrayList<>();

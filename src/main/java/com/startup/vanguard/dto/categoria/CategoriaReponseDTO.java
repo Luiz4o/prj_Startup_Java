@@ -3,7 +3,7 @@ package com.startup.vanguard.dto.categoria;
 import com.startup.vanguard.model.Categoria;
 
 public record CategoriaReponseDTO(
-        long id,
+        Long id,
         String nome,
         String descricao
 ) {
