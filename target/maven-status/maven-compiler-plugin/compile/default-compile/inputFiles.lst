@@ -40,7 +40,6 @@ C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\m
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\dto\usuario\UsuarioResponseDTO.java
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\controller\UsuarioController.java
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\exception\S3Exception.java
-C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\controller\S3Controller.java
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\dto\produto\ProdutoUpdatedDTO.java
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\dto\categoria\CategoriaUpdateDTO.java
 C:\Users\henri\Documents\minhapasta\Dev\Faculdade\STARTUP\prj_Startup_Java\src\main\java\com\startup\vanguard\model\Endereco.java
