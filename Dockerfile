@@ -4,15 +4,17 @@
 # ENTRYPOINT ["java","-jar","/app.jar"]
 # EXPOSE 8080
 
-FROM maven:3.8.3-openjdk-17 AS build
+FROM maven:3.8.3-openjdk-21 AS build
+WORKDIR /build
 COPY . .
-RUN mvn clean install
+RUN mvn clean package -DskipTests
 
 #
 # Package stage
 #
-FROM eclipse-temurin:17-jdk
-COPY --from=build /target/vanguard-0.0.1-SNAPSHOT.jar demo.jar
-# ENV PORT=8080
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+COPY --from=build /build/target/vanguard-0.0.1-SNAPSHOT.jar app.jar
+ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","demo.jar"]
