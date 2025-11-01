@@ -137,4 +137,14 @@ public class ProdutoService {
 
         produtoRepository.deleteById(id);
     }
+
+    public List<ProdutoResponseDTO> searchByName(String parteNome){
+        return produtoRepository.findByNomeContainingIgnoreCase(parteNome).stream()
+                .map(p ->{
+                    var urlFoto = s3Service.generatePresignedUrl(p.getReferenciaFoto(), getNomeBucketFoto);
+                    var urlDocumento = s3Service.generatePresignedUrl(p.getReferenciaDoc(), getNomeBucketDoc);
+                    return new ProdutoResponseDTO(p, urlFoto, urlDocumento);
+                })
+                .toList();
+    }
 }
