@@ -44,16 +44,19 @@ O backend conta com os seguintes módulos e fluxos principais:
 
 Estruturas principais (Spring Boot padrão):
 
-src/main/java │ 
-              ├── controllers (Recebem requisições da API, expõem endpoints REST) 
-              │ 
-              ├── services (Regras de negócio da aplicação) 
-              │ 
-              ├── repositories (Interfaces de persistência JPA / acesso ao PostgreSQL) 
-              │ 
-              ├── configs (Configurações de segurança, beans e integrações) 
-              │ 
-              └── models (Entidades e DTOs)
+```
+src/main/java
+│ 
+├── controllers (Recebem requisições da API, expõem endpoints REST) 
+│ 
+├── services (Regras de negócio da aplicação) 
+│ 
+├── repositories (Interfaces de persistência JPA / acesso ao PostgreSQL) 
+│ 
+├── configs (Configurações de segurança, beans e integrações) 
+│ 
+└── models (Entidades e DTOs)
+```
 
 ## ⚙️ Configuração da API (Local)
 
@@ -67,3 +70,4 @@ Depois disso, iniciar com:
 
 ```bash
 ./mvnw spring-boot:run
+
