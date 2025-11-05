@@ -5,6 +5,7 @@ import com.startup.vanguard.dto.usuario.UsuarioResponseDTO;
 import com.startup.vanguard.dto.usuario.UsuarioUpdateDTO;
 import com.startup.vanguard.model.Endereco;
 import com.startup.vanguard.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UsuarioResponseDTO> criarUsuario(@RequestBody UsuarioCreateDTO dto) {
+    public ResponseEntity<UsuarioResponseDTO> criarUsuario(@RequestBody @Valid UsuarioCreateDTO dto) {
 
         System.out.println(dto);
         var usuarioSaved = usuarioService.insertUsuario(dto);

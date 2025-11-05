@@ -33,14 +33,12 @@ public class UsuarioService {
         return new UsuarioResponseDTO(usuarioSaved);
     }
 
-    @Transactional
     public UsuarioResponseDTO findById(Long id) {
         var usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
         return new UsuarioResponseDTO(usuario);
     }
 
-    @Transactional
     public List<UsuarioResponseDTO> findAll() {
         return usuarioRepository.findAll().stream()
                 .map(UsuarioResponseDTO::new)
@@ -69,7 +67,6 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
-    @Transactional
     public Endereco findEnderecoById(Long usuarioId) {
         var usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário", usuarioId));

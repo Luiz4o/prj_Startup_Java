@@ -64,8 +64,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/pesquisa")
-    public ResponseEntity<List<ProdutoResponseDTO>> search(
-            @RequestParam("nome") String partialName) {
+    public ResponseEntity<List<ProdutoResponseDTO>> search(@RequestParam("nome") String partialName) {
 
         var produtos = produtoService.searchByName(partialName);
 
