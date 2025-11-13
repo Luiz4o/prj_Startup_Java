@@ -44,6 +44,8 @@ public class PedidoController {
         return ResponseEntity.created(uri).body(pedido);
     }
 
+    // TODO ADICIONAR ENDPOINT PARA ATUALIZAR O STATUS DO PEDIDO
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         pedidoService.deletePedido(id);

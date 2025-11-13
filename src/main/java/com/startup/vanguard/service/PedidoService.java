@@ -85,6 +85,8 @@ public class PedidoService {
         pedido.setPedidoItems(pedidosItem);
         pedido = pedidoRepository.save(pedido);
 
+        // TODO ATUALIZAR O CARRINHO PARA INATIVO OU COMPRADO ALGUMA FORMA PARA ELE NAO LER MAIS AQUELE CARRINHO
+
         return PedidoResponseDTO.builder()
                 .id(pedido.getId())
                 .dataPedido(pedido.getDataPedido())
