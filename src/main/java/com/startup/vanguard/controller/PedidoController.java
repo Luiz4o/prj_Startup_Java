@@ -2,7 +2,6 @@ package com.startup.vanguard.controller;
 
 import com.startup.vanguard.dto.pedido.PedidoRequestDTO;
 import com.startup.vanguard.dto.pedido.PedidoResponseDTO;
-import com.startup.vanguard.service.CarrinhoService;
 import com.startup.vanguard.service.PedidoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +43,11 @@ public class PedidoController {
         return ResponseEntity.created(uri).body(pedido);
     }
 
-    // TODO ADICIONAR ENDPOINT PARA ATUALIZAR O STATUS DO PEDIDO
+    @PostMapping("/{id}/status")
+    public ResponseEntity<PedidoResponseDTO> updateStatus(@PathVariable Long id, @RequestBody String status){
+        var pedidoAtualizado = pedidoService.updateStatus(id, status);
+        return ResponseEntity.ok(pedidoAtualizado);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){

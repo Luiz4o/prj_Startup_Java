@@ -34,14 +34,14 @@ public class CarrinhoService {
     }
 
     public List<CarrinhoResponseDTO> findAll() {
-        var carrinhos = carrinhoRepository.findAll();
+        var carrinhos = carrinhoRepository.findByStatus(EnumStatus.COMPRANDO.name());
         return carrinhos.stream()
                 .map(CarrinhoResponseDTO::new)
                 .toList();
     }
 
     public CarrinhoResponseDTO findById(long id) {
-        var carrinho = carrinhoRepository.findById(id)
+        var carrinho = carrinhoRepository.findByUsuarioIdAndStatus(id,EnumStatus.COMPRANDO.name())
                 .orElseThrow(() -> new ResourceNotFoundException("Carrinho", id));
 
         return new CarrinhoResponseDTO(carrinho);

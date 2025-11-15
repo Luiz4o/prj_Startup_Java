@@ -24,8 +24,6 @@ import java.util.List;
 @RequestMapping("/api/categoria")
 public class CategoriaController {
 
-    // TODO IMPLEMENTAR SWAGGER
-
     private final CategoriaService categoriaService;
 
     public CategoriaController(CategoriaService categoriaService) {

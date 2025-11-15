@@ -76,8 +76,6 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtoService.updateProduto(produtoUpdateDTO));
     }
 
-    // TODO VALIDAR O DELETE DO PRODUTO SE ESTA FUNCIONANDO
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProdutuo(@PathVariable Long id){
         produtoService.deleteById(id);

@@ -6,7 +6,6 @@ import com.startup.vanguard.model.Endereco;
 import java.time.OffsetDateTime;
 
 
-// TODO ADICIONAR TIPO DO USUARIO SE É LOJISTA OU COMPRADOR NA HORA DA RESPOSTA
 public record UsuarioResponseDTO(
         Long id,
         String email,
@@ -16,7 +15,8 @@ public record UsuarioResponseDTO(
         String tipoPessoa,
         boolean isAtivo,
         OffsetDateTime dataCriacao,
-        Endereco endereco
+        Endereco endereco,
+        String tipoUsuario
 ) {
     public UsuarioResponseDTO(Usuario usuario) {
         this(
@@ -28,7 +28,8 @@ public record UsuarioResponseDTO(
                 usuario.getTipoPessoa(),
                 usuario.isAtivo(),
                 usuario.getData_criacao(),
-                usuario.getEndereco()
+                usuario.getEndereco(),
+                usuario.getTipoUsuario()
         );
     }
 }

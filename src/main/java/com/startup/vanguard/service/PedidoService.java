@@ -1,5 +1,6 @@
 package com.startup.vanguard.service;
 
+import com.startup.vanguard.dto.carrinho.EnumStatus;
 import com.startup.vanguard.dto.pedido.PedidoRequestDTO;
 import com.startup.vanguard.dto.pedido.PedidoResponseDTO;
 import com.startup.vanguard.dto.usuario.UsuarioResponseDTO;
@@ -85,7 +86,8 @@ public class PedidoService {
         pedido.setPedidoItems(pedidosItem);
         pedido = pedidoRepository.save(pedido);
 
-        // TODO ATUALIZAR O CARRINHO PARA INATIVO OU COMPRADO ALGUMA FORMA PARA ELE NAO LER MAIS AQUELE CARRINHO
+        carrinhoPedido.setStatus(EnumStatus.FINALIZADO.name());
+        carrinhoRepository.save(carrinhoPedido);
 
         return PedidoResponseDTO.builder()
                 .id(pedido.getId())
@@ -96,6 +98,25 @@ public class PedidoService {
                 .valor_total(pedido.getValor_total())
                 .comprador(new UsuarioResponseDTO(pedido.getUsuario()))
                 .itens(pedido.getPedidoItems())
+                .build();
+    }
+
+    @Transactional
+    public PedidoResponseDTO updateStatus(Long id, String status){
+        var pedido = pedidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pedido", id));
+        pedido.setStatusPedido(status);
+        pedido.setUltimaAtualizacao(OffsetDateTime.now());
+        var pedidoAtualizado = pedidoRepository.save(pedido);
+
+        return PedidoResponseDTO.builder()
+                .id(pedidoAtualizado.getId())
+                .dataPedido(pedidoAtualizado.getDataPedido())
+                .statusPedido(pedidoAtualizado.getStatusPedido())
+                .enderecoEntrega(pedidoAtualizado.getEnderecoEntrega())
+                .ultimaAtualizacao(pedidoAtualizado.getUltimaAtualizacao())
+                .valor_total(pedidoAtualizado.getValor_total())
+                .comprador(new UsuarioResponseDTO(pedidoAtualizado.getUsuario()))
+                .itens(pedidoAtualizado.getPedidoItems())
                 .build();
     }
 
