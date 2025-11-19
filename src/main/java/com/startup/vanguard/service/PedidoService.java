@@ -59,13 +59,55 @@ public class PedidoService {
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido", id));
     }
 
+//    @Transactional
+//    public PedidoResponseDTO criarPedido(PedidoRequestDTO pedidoRequestDTO){
+//        var carrinhoPedido = carrinhoRepository.findById(pedidoRequestDTO.idCarrinho())
+//                        .orElseThrow(() -> new ResourceNotFoundException("Carrinho", pedidoRequestDTO.idCarrinho()));
+//
+//        var compradorPedido = compradorRepository.findById(pedidoRequestDTO.idComprador())
+//                        .orElseThrow(() -> new ResourceNotFoundException("Comprador", pedidoRequestDTO.idComprador()));
+//
+//        var pedido = pedidoRepository.save(Pedido.builder()
+//                .carrinho(carrinhoPedido)
+//                .dataPedido(OffsetDateTime.now())
+//                .statusPedido("PROCESSANDO")
+//                .enderecoEntrega(pedidoRequestDTO.enderecoEntrega())
+//                .ultimaAtualizacao(OffsetDateTime.now())
+//                .usuario(compradorPedido)
+//                .build());
+//
+//        var pedidosItem = pedidoItemService.createPedidoItemByCarrinhoItem(carrinhoPedido.getItens(),pedido);
+//
+//        var valorTotal = pedidosItem.stream()
+//                .map(item -> item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+//
+//        pedido.setValor_total(valorTotal);
+//        pedido.setPedidoItems(pedidosItem);
+//        pedido = pedidoRepository.save(pedido);
+//
+//        carrinhoPedido.setStatus(EnumStatus.FINALIZADO.name());
+//        carrinhoRepository.save(carrinhoPedido);
+//
+//        return PedidoResponseDTO.builder()
+//                .id(pedido.getId())
+//                .dataPedido(pedido.getDataPedido())
+//                .statusPedido(pedido.getStatusPedido())
+//                .enderecoEntrega(pedido.getEnderecoEntrega())
+//                .ultimaAtualizacao(pedido.getUltimaAtualizacao())
+//                .valor_total(pedido.getValor_total())
+//                .comprador(new UsuarioResponseDTO(pedido.getUsuario()))
+//                .itens(pedido.getPedidoItems())
+//                .build();
+//    }
+
     @Transactional
-    public PedidoResponseDTO insertPedido(PedidoRequestDTO pedidoRequestDTO){
+    public PedidoResponseDTO criarPedido(PedidoRequestDTO pedidoRequestDTO) {
         var carrinhoPedido = carrinhoRepository.findById(pedidoRequestDTO.idCarrinho())
-                        .orElseThrow(() -> new ResourceNotFoundException("Carrinho", pedidoRequestDTO.idCarrinho()));
+                .orElseThrow(() -> new ResourceNotFoundException("Carrinho", pedidoRequestDTO.idCarrinho()));
 
         var compradorPedido = compradorRepository.findById(pedidoRequestDTO.idComprador())
-                        .orElseThrow(() -> new ResourceNotFoundException("Comprador", pedidoRequestDTO.idComprador()));
+                .orElseThrow(() -> new ResourceNotFoundException("Comprador", pedidoRequestDTO.idComprador()));
 
         var pedido = pedidoRepository.save(Pedido.builder()
                 .carrinho(carrinhoPedido)
@@ -76,7 +118,27 @@ public class PedidoService {
                 .usuario(compradorPedido)
                 .build());
 
-        var pedidosItem = pedidoItemService.createPedidoItemByCarrinhoItem(carrinhoPedido.getItens(),pedido);
+        return PedidoResponseDTO.builder()
+                .id(pedido.getId())
+                .dataPedido(pedido.getDataPedido())
+                .statusPedido(pedido.getStatusPedido())
+                .enderecoEntrega(pedido.getEnderecoEntrega())
+                .ultimaAtualizacao(pedido.getUltimaAtualizacao())
+                .valor_total(pedido.getValor_total())
+                .comprador(new UsuarioResponseDTO(pedido.getUsuario()))
+                .build();
+    }
+
+    @Transactional
+    public PedidoResponseDTO processarItensCarrinho(String idPagamento) {
+        var pedido = pedidoRepository.findByIdPagamento(idPagamento)
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido", 0L));
+
+        Pedido finalPedido = pedido;
+        var carrinhoPedido = carrinhoRepository.findById(pedido.getCarrinho().getId())
+                .orElseThrow(() -> new ResourceNotFoundException( "Carrinho", finalPedido.getCarrinho().getId()));
+
+        var pedidosItem = pedidoItemService.createPedidoItemByCarrinhoItem(carrinhoPedido.getItens(), pedido);
 
         var valorTotal = pedidosItem.stream()
                 .map(item -> item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
@@ -99,6 +161,15 @@ public class PedidoService {
                 .comprador(new UsuarioResponseDTO(pedido.getUsuario()))
                 .itens(pedido.getPedidoItems())
                 .build();
+    }
+
+    @Transactional
+    public void pagamentoReprovado(String paymentId){
+        var pedido = pedidoRepository.findByIdPagamento(paymentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido", 0L));
+        pedido.setStatusPedido(EnumStatus.REPROVADO.name());
+        pedido.setUltimaAtualizacao(OffsetDateTime.now());
+        pedidoRepository.save(pedido);
     }
 
     @Transactional

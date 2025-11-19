@@ -32,7 +32,7 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<PedidoResponseDTO> insert(@RequestBody PedidoRequestDTO dto){
-        var pedido = pedidoService.insertPedido(dto);
+        var pedido = pedidoService.criarPedido(dto);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

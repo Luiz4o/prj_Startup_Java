@@ -44,4 +44,7 @@ public class Pedido {
     private Endereco enderecoEntrega;
 
     private OffsetDateTime ultimaAtualizacao;
+
+    @Column(name = "id_pagamento")
+    private String idPagamento;
 }
