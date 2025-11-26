@@ -3,6 +3,7 @@ package com.startup.vanguard.controller;
 import com.startup.vanguard.dto.pedido.PedidoRequestDTO;
 import com.startup.vanguard.dto.pedido.PedidoResponseDTO;
 import com.startup.vanguard.service.PedidoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/pedido")
+@SecurityRequirement(name = "Bearer Authentication")
 public class PedidoController {
 
     private final PedidoService pedidoService;

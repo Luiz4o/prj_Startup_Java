@@ -5,6 +5,7 @@ import com.startup.vanguard.dto.carrinho.CarrinhoRequestDTO;
 import com.startup.vanguard.dto.carrinho.CarrinhoResponseDTO;
 import com.startup.vanguard.dto.carrinho.CarrinhoUpdateDTO;
 import com.startup.vanguard.service.CarrinhoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/carrinho")
+@SecurityRequirement(name = "Bearer Authentication")
 public class CarrinhoController {
 
     private final CarrinhoService carrinhoService;

@@ -6,6 +6,7 @@ import com.startup.vanguard.dto.produto.ProdutoResponseDTO;
 import com.startup.vanguard.dto.produto.ProdutoUpdateDTO;
 import com.startup.vanguard.dto.produto.ProdutoUpdatedDTO;
 import com.startup.vanguard.service.ProdutoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produto")
+@SecurityRequirement(name = "Bearer Authentication")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
